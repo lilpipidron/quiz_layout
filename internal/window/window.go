@@ -18,7 +18,6 @@ func StartWindow() {
 	content := container.NewVBox()
 	signIn := widget.NewButton("sign in", func() {
 		buttonLogic.SignIn(login, password, myWindow, content)
-
 	})
 
 	registration := widget.NewButton("registration", func() {
