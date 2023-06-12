@@ -33,7 +33,7 @@ func SignIn(l, p *widget.Entry, window fyne.Window, content *fyne.Container) boo
 func Registration(l, p *widget.Entry) {
 	login := l.Text
 	password := p.Text
-	filename := login + "log.txt"
+	filename := login + "-log.txt"
 	_, err := os.Create(filename)
 	if err != nil {
 		log.Fatal(err)
