@@ -30,15 +30,22 @@ func SignIn(inputLogin, inputPassword *widget.Entry, window fyne.Window, content
 	return true
 }
 
-func Registration(l, p *widget.Entry) {
-	login := l.Text
-	password := p.Text
+func Registration(inputLogin, inputPassword *widget.Entry) {
+	login := inputLogin.Text
+	password := inputPassword.Text
 	filename := login + "-log.txt"
-	_, err := os.Create(filename)
-	if err != nil {
-		log.Fatal(err)
-	}
 
-	sendLoginRegistration(login)
-	sendPasswordRegistration(login, password)
+	_, statErr := os.Stat(filename)
+	if statErr != nil {
+		if os.IsNotExist(statErr) {
+			_, createErr := os.Create(filename)
+			if createErr != nil {
+				log.Fatal(createErr)
+			}
+			sendLoginRegistration(login)
+			sendPasswordRegistration(login, password)
+		}
+	}
+	log.SetOutput(os.Stderr)
+	log.Println("Such user already exists")
 }
