@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-func SignIn(inputLogin, inputPassword *widget.Entry, window fyne.Window, content *fyne.Container) bool {
+func LogIn(inputLogin, inputPassword *widget.Entry, window fyne.Window, content *fyne.Container) bool {
 	login := inputLogin.Text
 	password := inputPassword.Text
 
@@ -20,7 +20,7 @@ func SignIn(inputLogin, inputPassword *widget.Entry, window fyne.Window, content
 		content.Objects = content.Objects[:len(content.Objects)-1]
 	}
 
-	if !(sendLoginSign(login) && sendPasswordSign(login, password)) {
+	if !(sendLoginLogIn(login) && sendPasswordLogIn(login, password)) {
 		content.Add(wrongDataMessage)
 		window.SetContent(content) // Обновление содержимого окна
 		window.Resize(window.Canvas().Size())
@@ -30,7 +30,7 @@ func SignIn(inputLogin, inputPassword *widget.Entry, window fyne.Window, content
 	return true
 }
 
-func Registration(inputLogin, inputPassword *widget.Entry) {
+func SignUp(inputLogin, inputPassword *widget.Entry) {
 	login := inputLogin.Text
 	password := inputPassword.Text
 	filename := login + "-log.txt"
@@ -42,8 +42,8 @@ func Registration(inputLogin, inputPassword *widget.Entry) {
 			if createErr != nil {
 				log.Fatal(createErr)
 			}
-			sendLoginRegistration(login)
-			sendPasswordRegistration(login, password)
+			sendLoginSignUp(login)
+			sendPasswordSignUp(login, password)
 		}
 	}
 	log.SetOutput(os.Stderr)

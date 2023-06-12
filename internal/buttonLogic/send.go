@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func sendLoginSign(login string) bool {
+func sendLoginLogIn(login string) bool {
 	filename := login + "-log.txt"
 	logFile := fileWork.OpenRead(filename)
 	defer fileWork.CloseFunc(logFile)
@@ -24,7 +24,7 @@ func sendLoginSign(login string) bool {
 	return true
 }
 
-func sendPasswordSign(login, password string) bool {
+func sendPasswordLogIn(login, password string) bool {
 	hashPass := myHash.Password_hash(password)
 	filename := login + "-log.txt"
 	logFile := fileWork.OpenRead(filename)
@@ -51,7 +51,7 @@ func sendPasswordSign(login, password string) bool {
 	return true
 }
 
-func sendLoginRegistration(login string) {
+func sendLoginSignUp(login string) {
 	filename := login + "-log.txt"
 	logFile := fileWork.OpenWrite(filename)
 	defer fileWork.CloseFunc(logFile)
@@ -68,7 +68,7 @@ func sendLoginRegistration(login string) {
 	}
 }
 
-func sendPasswordRegistration(login, password string) {
+func sendPasswordSignUp(login, password string) {
 	hashPass := myHash.Password_hash(password)
 	filename := login + "-log.txt"
 	logFile := fileWork.OpenWrite(filename)

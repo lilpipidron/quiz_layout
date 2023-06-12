@@ -17,17 +17,17 @@ func StartWindow() {
 	password.SetPlaceHolder("Enter password")
 
 	content := container.NewVBox()
-	signIn := widget.NewButton("Sign in", func() {
-		if buttonLogic.SignIn(login, password, myWindow, content) {
+	logIn := widget.NewButton("Log in", func() {
+		if buttonLogic.LogIn(login, password, myWindow, content) {
 			newLayout(content)
 		}
 	})
 
-	registration := widget.NewButton("Registration", func() {
-		buttonLogic.Registration(login, password)
+	signUp := widget.NewButton("Sign up", func() {
+		buttonLogic.SignUp(login, password)
 	})
 
-	buttons := container.NewGridWithColumns(10, signIn, registration)
+	buttons := container.NewGridWithColumns(10, logIn, signUp)
 	content = container.NewVBox(login, password, buttons)
 	myWindow.SetContent(content)
 	myWindow.ShowAndRun()
