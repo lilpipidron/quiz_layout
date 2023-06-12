@@ -15,14 +15,15 @@ func StartWindow() {
 	login.SetPlaceHolder("Enter login")
 	password := widget.NewPasswordEntry()
 	password.SetPlaceHolder("Enter password")
+
 	content := container.NewVBox()
-	signIn := widget.NewButton("sign in", func() {
+	signIn := widget.NewButton("Sign in", func() {
 		if buttonLogic.SignIn(login, password, myWindow, content) {
 			newLayout(content)
 		}
 	})
 
-	registration := widget.NewButton("registration", func() {
+	registration := widget.NewButton("Registration", func() {
 		buttonLogic.Registration(login, password)
 	})
 
