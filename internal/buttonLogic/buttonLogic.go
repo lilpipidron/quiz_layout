@@ -9,9 +9,9 @@ import (
 	"os"
 )
 
-func SignIn(l, p *widget.Entry, window fyne.Window, content *fyne.Container) bool {
-	login := l.Text
-	password := p.Text
+func SignIn(inputLogin, inputPassword *widget.Entry, window fyne.Window, content *fyne.Container) bool {
+	login := inputLogin.Text
+	password := inputPassword.Text
 
 	wrongData := canvas.NewText("Incorrect login/password", color.RGBA{R: 255, A: 255})
 	wrongData.TextStyle = fyne.TextStyle{Italic: true}
