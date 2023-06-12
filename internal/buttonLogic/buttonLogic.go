@@ -47,5 +47,5 @@ func SignUp(inputLogin, inputPassword *widget.Entry) {
 		}
 	}
 	log.SetOutput(os.Stderr)
-	log.Println("Such user already exists")
+	log.Println("This username already exists")
 }
