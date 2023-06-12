@@ -1,10 +1,10 @@
 package window
 
 import (
-	"GolandProjects/game_with_Nikita/internal/buttonLogic"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"game_with_Nikita/internal/buttonLogic"
 )
 
 func StartWindow() {
@@ -16,15 +16,16 @@ func StartWindow() {
 	password := widget.NewPasswordEntry()
 	password.SetPlaceHolder("Enter password")
 
-	sign_in := widget.NewButton("sign in", func() {
-		buttonLogic.Sign_in(login, password)
+	signIn := widget.NewButton("sign in", func() {
+		buttonLogic.SignIn(login, password)
+		buttonLogic.NewLayout()
 	})
 
 	registration := widget.NewButton("registration", func() {
 		buttonLogic.Registration(login, password)
 	})
 
-	buttons := container.NewGridWithColumns(10, sign_in, registration)
+	buttons := container.NewGridWithColumns(10, signIn, registration)
 	content := container.NewVBox(login, password, buttons)
 	w.SetContent(content)
 	w.ShowAndRun()

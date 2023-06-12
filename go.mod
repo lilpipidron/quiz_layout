@@ -1,4 +1,4 @@
-module GolandProjects/game_with_Nikita
+module game_with_Nikita
 
 go 1.20
 

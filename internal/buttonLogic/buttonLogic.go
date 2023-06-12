@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func Sign_in(l, p *widget.Entry) {
+func SignIn(l, p *widget.Entry) {
 	login := l.Text
 	password := p.Text
 
@@ -24,4 +24,8 @@ func Registration(l, p *widget.Entry) {
 
 	send_login_registation(login)
 	send_password_registration(password)
+}
+
+func NewLayout() {
+
 }

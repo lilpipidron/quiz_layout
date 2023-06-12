@@ -1,6 +1,6 @@
 package main
 
-import "GolandProjects/game_with_Nikita/internal/window"
+import "game_with_Nikita/internal/window"
 
 func main() {
 	window.StartWindow()

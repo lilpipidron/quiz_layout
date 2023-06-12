@@ -1,10 +1,10 @@
 package buttonLogic
 
 import (
-	"GolandProjects/game_with_Nikita/internal/fileWork"
-	"GolandProjects/game_with_Nikita/internal/myHash"
 	"bufio"
 	"fmt"
+	"game_with_Nikita/internal/fileWork"
+	"game_with_Nikita/internal/myHash"
 	"log"
 	"strconv"
 )
