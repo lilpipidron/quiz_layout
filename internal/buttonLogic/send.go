@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func send_login_sign(login string) {
+func send_login_sign(login string) bool {
 	logFile := fileWork.OpenRead("log.txt")
 	defer fileWork.CloseFunc(logFile)
 	reader := bufio.NewReader(logFile)
@@ -18,11 +18,12 @@ func send_login_sign(login string) {
 		log.Fatal(err)
 	}
 	if string(line) != login {
-		log.Fatal("Incorrect login/password")
+		return false
 	}
+	return true
 }
 
-func send_password_sign(password string) {
+func send_password_sign(password string) bool {
 	hash_pass := myHash.Password_hash(password)
 	logFile := fileWork.OpenRead("log.txt")
 	defer fileWork.CloseFunc(logFile)
@@ -43,8 +44,9 @@ func send_password_sign(password string) {
 	}
 
 	if lineS != hash_pass {
-		log.Fatal("Incorrect login/password")
+		return false
 	}
+	return true
 }
 
 func send_login_registation(login string) {

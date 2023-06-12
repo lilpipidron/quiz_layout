@@ -8,17 +8,17 @@ import (
 )
 
 func StartWindow() {
-	a := app.New()
-	w := a.NewWindow("qwe")
+	myApp := app.New()
+	myWindow := myApp.NewWindow("qwe")
 
 	login := widget.NewEntry()
 	login.SetPlaceHolder("Enter login")
 	password := widget.NewPasswordEntry()
 	password.SetPlaceHolder("Enter password")
-
+	content := container.NewVBox()
 	signIn := widget.NewButton("sign in", func() {
-		buttonLogic.SignIn(login, password)
-		buttonLogic.NewLayout()
+		buttonLogic.SignIn(login, password, myWindow, content)
+
 	})
 
 	registration := widget.NewButton("registration", func() {
@@ -26,7 +26,7 @@ func StartWindow() {
 	})
 
 	buttons := container.NewGridWithColumns(10, signIn, registration)
-	content := container.NewVBox(login, password, buttons)
-	w.SetContent(content)
-	w.ShowAndRun()
+	content = container.NewVBox(login, password, buttons)
+	myWindow.SetContent(content)
+	myWindow.ShowAndRun()
 }
