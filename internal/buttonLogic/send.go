@@ -9,8 +9,9 @@ import (
 	"strconv"
 )
 
-func send_login_sign(login string) bool {
-	logFile := fileWork.OpenRead("log.txt")
+func sendLoginSign(login string) bool {
+	filename := login + "log.txt"
+	logFile := fileWork.OpenRead(filename)
 	defer fileWork.CloseFunc(logFile)
 	reader := bufio.NewReader(logFile)
 	line, _, err := reader.ReadLine()
@@ -23,9 +24,10 @@ func send_login_sign(login string) bool {
 	return true
 }
 
-func send_password_sign(password string) bool {
-	hash_pass := myHash.Password_hash(password)
-	logFile := fileWork.OpenRead("log.txt")
+func sendPasswordSign(login, password string) bool {
+	hashPass := myHash.Password_hash(password)
+	filename := login + "log.txt"
+	logFile := fileWork.OpenRead(filename)
 	defer fileWork.CloseFunc(logFile)
 	reader := bufio.NewReader(logFile)
 
@@ -43,14 +45,15 @@ func send_password_sign(password string) bool {
 		log.Fatal(err)
 	}
 
-	if lineS != hash_pass {
+	if lineS != hashPass {
 		return false
 	}
 	return true
 }
 
-func send_login_registation(login string) {
-	logFile := fileWork.OpenWrite("log.txt")
+func sendLoginRegistration(login string) {
+	filename := login + "log.txt"
+	logFile := fileWork.OpenRead(filename)
 	defer fileWork.CloseFunc(logFile)
 	writer := bufio.NewWriter(logFile)
 	defer func(writer *bufio.Writer) {
@@ -65,9 +68,10 @@ func send_login_registation(login string) {
 	}
 }
 
-func send_password_registration(password string) {
-	hash_pass := myHash.Password_hash(password)
-	logFile := fileWork.OpenWrite("log.txt")
+func sendPasswordRegistration(login, password string) {
+	hashPass := myHash.Password_hash(password)
+	filename := login + "log.txt"
+	logFile := fileWork.OpenRead(filename)
 	defer fileWork.CloseFunc(logFile)
 
 	scanner := bufio.NewScanner(logFile)
@@ -80,7 +84,7 @@ func send_password_registration(password string) {
 	}(writer)
 
 	scanner.Scan()
-	_, err := fmt.Fprintln(writer, hash_pass)
+	_, err := fmt.Fprintln(writer, hashPass)
 	if err != nil {
 		log.Fatal(err)
 	}

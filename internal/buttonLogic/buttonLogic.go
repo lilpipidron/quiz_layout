@@ -20,7 +20,7 @@ func SignIn(l, p *widget.Entry, window fyne.Window, content *fyne.Container) boo
 		content.Objects = content.Objects[:len(content.Objects)-1]
 	}
 
-	if !(send_login_sign(login) && send_password_sign(password)) {
+	if !(sendLoginSign(login) && sendPasswordSign(login, password)) {
 		content.Add(wrongData)
 		window.SetContent(content) // Обновление содержимого окна
 		window.Resize(window.Canvas().Size())
@@ -33,11 +33,12 @@ func SignIn(l, p *widget.Entry, window fyne.Window, content *fyne.Container) boo
 func Registration(l, p *widget.Entry) {
 	login := l.Text
 	password := p.Text
-	_, err := os.Create("log.txt")
+	filename := login + "log.txt"
+	_, err := os.Create(filename)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	send_login_registation(login)
-	send_password_registration(password)
+	sendLoginRegistration(login)
+	sendPasswordRegistration(login, password)
 }
