@@ -9,9 +9,11 @@ import (
 func Sign_in(l, p *widget.Entry) {
 	login := l.Text
 	password := p.Text
+
 	send_login_sign(login)
 	send_password_sign(password)
 }
+
 func Registration(l, p *widget.Entry) {
 	login := l.Text
 	password := p.Text
@@ -19,6 +21,7 @@ func Registration(l, p *widget.Entry) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	send_login_registation(login)
 	send_password_registration(password)
 }
