@@ -88,4 +88,5 @@ func sendPasswordRegistration(login, password string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }
