@@ -53,7 +53,7 @@ func sendPasswordSign(login, password string) bool {
 
 func sendLoginRegistration(login string) {
 	filename := login + "log.txt"
-	logFile := fileWork.OpenRead(filename)
+	logFile := fileWork.OpenWrite(filename)
 	defer fileWork.CloseFunc(logFile)
 	writer := bufio.NewWriter(logFile)
 	defer func(writer *bufio.Writer) {
@@ -71,7 +71,7 @@ func sendLoginRegistration(login string) {
 func sendPasswordRegistration(login, password string) {
 	hashPass := myHash.Password_hash(password)
 	filename := login + "log.txt"
-	logFile := fileWork.OpenRead(filename)
+	logFile := fileWork.OpenWrite(filename)
 	defer fileWork.CloseFunc(logFile)
 
 	scanner := bufio.NewScanner(logFile)
