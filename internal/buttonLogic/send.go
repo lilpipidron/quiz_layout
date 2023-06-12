@@ -10,7 +10,6 @@ import (
 )
 
 func send_login_sign(login string) {
-
 	logFile := fileWork.OpenRead("log.txt")
 	defer fileWork.CloseFunc(logFile)
 	reader := bufio.NewReader(logFile)
@@ -22,6 +21,7 @@ func send_login_sign(login string) {
 		log.Fatal("Incorrect login/password")
 	}
 }
+
 func send_password_sign(password string) {
 	hash_pass := myHash.Password_hash(password)
 	logFile := fileWork.OpenRead("log.txt")
@@ -46,8 +46,8 @@ func send_password_sign(password string) {
 		log.Fatal("Incorrect login/password")
 	}
 }
-func send_login_registation(login string) {
 
+func send_login_registation(login string) {
 	logFile := fileWork.OpenWrite("log.txt")
 	defer fileWork.CloseFunc(logFile)
 	writer := bufio.NewWriter(logFile)
@@ -62,6 +62,7 @@ func send_login_registation(login string) {
 		log.Fatal(err)
 	}
 }
+
 func send_password_registration(password string) {
 	hash_pass := myHash.Password_hash(password)
 	logFile := fileWork.OpenWrite("log.txt")
@@ -81,5 +82,4 @@ func send_password_registration(password string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }
