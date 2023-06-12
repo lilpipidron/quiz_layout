@@ -11,24 +11,25 @@ func StartWindow() {
 	myApp := app.New()
 	myWindow := myApp.NewWindow("qwe")
 
-	login := widget.NewEntry()
-	login.SetPlaceHolder("Enter login")
-	password := widget.NewPasswordEntry()
-	password.SetPlaceHolder("Enter password")
+	loginEntry := widget.NewEntry()
+	loginEntry.SetPlaceHolder("Enter login")
+	passwordEntry := widget.NewPasswordEntry()
+	passwordEntry.SetPlaceHolder("Enter password")
 
 	content := container.NewVBox()
 	logIn := widget.NewButton("Log in", func() {
-		if buttonLogic.LogIn(login, password, myWindow, content) {
-			newLayout(content)
+		loggedIn, loginName := buttonLogic.LogIn(loginEntry, passwordEntry, myWindow, content)
+		if loggedIn {
+			NewLayout(content, loginName)
 		}
 	})
 
 	signUp := widget.NewButton("Sign up", func() {
-		buttonLogic.SignUp(login, password)
+		buttonLogic.SignUp(loginEntry, passwordEntry)
 	})
 
 	buttons := container.NewGridWithColumns(10, logIn, signUp)
-	content = container.NewVBox(login, password, buttons)
+	content = container.NewVBox(loginEntry, passwordEntry, buttons)
 	myWindow.SetContent(content)
 	myWindow.ShowAndRun()
 }

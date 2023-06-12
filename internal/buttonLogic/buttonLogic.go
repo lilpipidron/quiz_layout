@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-func LogIn(inputLogin, inputPassword *widget.Entry, window fyne.Window, content *fyne.Container) bool {
+func LogIn(inputLogin, inputPassword *widget.Entry, window fyne.Window, content *fyne.Container) (bool, string) {
 	login := inputLogin.Text
 	password := inputPassword.Text
 
@@ -24,16 +24,16 @@ func LogIn(inputLogin, inputPassword *widget.Entry, window fyne.Window, content 
 		content.Add(wrongDataMessage)
 		window.SetContent(content) // Обновление содержимого окна
 		window.Resize(window.Canvas().Size())
-		return false
+		return false, ""
 	}
 
-	return true
+	return true, login
 }
 
-func SignUp(inputLogin, inputPassword *widget.Entry) {
-	login := inputLogin.Text
-	password := inputPassword.Text
-	filename := login + "-log.txt"
+func SignUp(loginEntry, passwordEntry *widget.Entry) {
+	username := loginEntry.Text
+	password := passwordEntry.Text
+	filename := username + "-log.txt"
 
 	_, statErr := os.Stat(filename)
 	if statErr != nil {
@@ -42,8 +42,8 @@ func SignUp(inputLogin, inputPassword *widget.Entry) {
 			if createErr != nil {
 				log.Fatal(createErr)
 			}
-			sendLoginSignUp(login)
-			sendPasswordSignUp(login, password)
+			sendLoginSignUp(username)
+			sendPasswordSignUp(username, password)
 		}
 	}
 	log.SetOutput(os.Stderr)
