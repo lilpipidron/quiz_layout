@@ -15,16 +15,14 @@ type State int
 
 const (
 	first State = iota + 1
-	second
-	third
 )
 
-func NewLayout(content *fyne.Container, login string) {
+func SecondLayout(content *fyne.Container, login string) {
 	content.RemoveAll()
-	example := canvas.NewText("test", color.RGBA{R: 255, A: 255})
+	example := canvas.NewText("test", color.RGBA{R: 255, B: 255, A: 255})
 	content.Add(example)
 
-	currentState := third
+	currentState := first
 
 	filename := "log.txt"
 	_, statErr := os.Stat(filename)

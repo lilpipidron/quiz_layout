@@ -20,7 +20,7 @@ func StartWindow() {
 	logIn := widget.NewButton("Log in", func() {
 		loggedIn, loginName := buttonLogic.LogIn(loginEntry, passwordEntry, myWindow, content)
 		if loggedIn {
-			NewLayout(content, loginName)
+			SecondLayout(content, loginName)
 		}
 	})
 

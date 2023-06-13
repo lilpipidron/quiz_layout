@@ -9,9 +9,9 @@ import (
 	"os"
 )
 
-func LogIn(inputLogin, inputPassword *widget.Entry, window fyne.Window, content *fyne.Container) (bool, string) {
-	login := inputLogin.Text
-	password := inputPassword.Text
+func LogIn(loginEntry, passwordEntry *widget.Entry, window fyne.Window, content *fyne.Container) (bool, string) {
+	login := loginEntry.Text
+	password := passwordEntry.Text
 
 	wrongDataMessage := canvas.NewText("Incorrect login/password", color.RGBA{R: 255, A: 255})
 	wrongDataMessage.TextStyle = fyne.TextStyle{Italic: true}
@@ -31,9 +31,9 @@ func LogIn(inputLogin, inputPassword *widget.Entry, window fyne.Window, content 
 }
 
 func SignUp(loginEntry, passwordEntry *widget.Entry) {
-	username := loginEntry.Text
+	login := loginEntry.Text
 	password := passwordEntry.Text
-	filename := username + "-log.txt"
+	filename := login + "-log.txt"
 
 	_, statErr := os.Stat(filename)
 	if statErr != nil {
@@ -42,8 +42,8 @@ func SignUp(loginEntry, passwordEntry *widget.Entry) {
 			if createErr != nil {
 				log.Fatal(createErr)
 			}
-			sendLoginSignUp(username)
-			sendPasswordSignUp(username, password)
+			sendLoginSignUp(login)
+			sendPasswordSignUp(login, password)
 		}
 	}
 	log.SetOutput(os.Stderr)
