@@ -25,7 +25,7 @@ func StartWindow() {
 	})
 
 	signUp := widget.NewButton("Sign up", func() {
-		buttonLogic.SignUp(loginEntry, passwordEntry)
+		buttonLogic.SignUp(loginEntry, passwordEntry, myWindow, content)
 	})
 
 	buttons := container.NewGridWithColumns(10, logIn, signUp)

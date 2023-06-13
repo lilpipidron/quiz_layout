@@ -25,6 +25,9 @@ func sendLoginLogIn(login string) bool {
 }
 
 func sendPasswordLogIn(login, password string) bool {
+	if len(password) < 8 {
+		return false
+	}
 	hashPass := myHash.PasswordHash(password)
 	filename := login + "-log.txt"
 	logFile := fileWork.OpenRead(filename)
@@ -88,5 +91,4 @@ func sendPasswordSignUp(login, password string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }
