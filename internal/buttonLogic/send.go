@@ -24,12 +24,11 @@ func sendLoginLogIn(login string) bool {
 	return true
 }
 
-func sendPasswordLogIn(login, password string) bool {
+func sendPasswordLogIn(filename, password string) bool {
 	if len(password) < 8 {
 		return false
 	}
 	hashPass := myHash.PasswordHash(password)
-	filename := login + "-log.txt"
 	logFile := fileWork.OpenRead(filename)
 	defer fileWork.CloseFunc(logFile)
 	reader := bufio.NewReader(logFile)

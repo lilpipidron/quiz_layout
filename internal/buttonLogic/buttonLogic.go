@@ -31,7 +31,7 @@ func LogIn(loginEntry, passwordEntry *widget.Entry, window fyne.Window, content 
 		}
 	}
 
-	if invalidLogin || !(sendLoginLogIn(login) && sendPasswordLogIn(login, password)) {
+	if invalidLogin || !(sendLoginLogIn(login) && sendPasswordLogIn(filename, password)) {
 		content.Add(wrongDataMessage)
 		window.SetContent(content) // Обновление содержимого окна
 		window.Resize(window.Canvas().Size())
@@ -71,7 +71,9 @@ func SignUp(loginEntry, passwordEntry *widget.Entry, window fyne.Window, content
 			wrongDataMessage.TextStyle = fyne.TextStyle{Italic: true}
 		}
 	}
-	content.Add(wrongDataMessage)
-	window.SetContent(content) // Обновление содержимого окна
-	window.Resize(window.Canvas().Size())
+	if wrongDataMessage != nil {
+		content.Add(wrongDataMessage)
+		window.SetContent(content) // Обновление содержимого окна
+		window.Resize(window.Canvas().Size())
+	}
 }
