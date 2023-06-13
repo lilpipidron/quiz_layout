@@ -27,7 +27,9 @@ func SecondLayout(content *fyne.Container, login string) {
 	filename := "log.txt"
 	err := os.Remove(filename)
 	if err != nil {
-		log.Fatal(err)
+		if !os.IsNotExist(err) {
+			log.Fatal(err)
+		}
 	}
 	_, err = os.Create(filename)
 	if err != nil {
