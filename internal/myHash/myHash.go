@@ -2,16 +2,16 @@ package myHash
 
 import "log"
 
-func Password_hash(password string) uint64 {
+func PasswordHash(password string) uint64 {
 	if len(password) < 8 {
 		log.Fatal("Password can't be shorter than 8 symbols")
 	}
-	var hash_pas uint64
+	var hashPas uint64
 	for _, i := range password {
-		hash_pas ^= uint64(i)
-		hash_pas += uint64(i) * 256
-		hash_pas ^= uint64(1009)
-		hash_pas %= 18446744073709551609
+		hashPas ^= uint64(i)
+		hashPas += uint64(i) * 256
+		hashPas ^= uint64(1009)
+		hashPas %= 18446744073709551609
 	}
-	return hash_pas
+	return hashPas
 }

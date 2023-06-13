@@ -25,7 +25,7 @@ func sendLoginLogIn(login string) bool {
 }
 
 func sendPasswordLogIn(login, password string) bool {
-	hashPass := myHash.Password_hash(password)
+	hashPass := myHash.PasswordHash(password)
 	filename := login + "-log.txt"
 	logFile := fileWork.OpenRead(filename)
 	defer fileWork.CloseFunc(logFile)
@@ -69,7 +69,7 @@ func sendLoginSignUp(login string) {
 }
 
 func sendPasswordSignUp(login, password string) {
-	hashPass := myHash.Password_hash(password)
+	hashPass := myHash.PasswordHash(password)
 	filename := login + "-log.txt"
 	logFile := fileWork.OpenWrite(filename)
 	defer fileWork.CloseFunc(logFile)
