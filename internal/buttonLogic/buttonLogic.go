@@ -33,7 +33,7 @@ func LogIn(loginEntry, passwordEntry *widget.Entry, window fyne.Window, content 
 
 	if invalidLogin || !(sendLoginLogIn(login) && sendPasswordLogIn(filename, password)) {
 		content.Add(wrongDataMessage)
-		window.SetContent(content) // Обновление содержимого окна
+		window.SetContent(content)
 		window.Resize(window.Canvas().Size())
 		return false, ""
 	}
@@ -73,7 +73,7 @@ func SignUp(loginEntry, passwordEntry *widget.Entry, window fyne.Window, content
 	}
 	if wrongDataMessage != nil {
 		content.Add(wrongDataMessage)
-		window.SetContent(content) // Обновление содержимого окна
+		window.SetContent(content)
 		window.Resize(window.Canvas().Size())
 	}
 }
