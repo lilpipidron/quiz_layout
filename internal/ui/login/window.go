@@ -1,10 +1,10 @@
-package window
+package ui
 
 import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	"game_with_Nikita/internal/buttonLogic"
+	"game_with_Nikita/internal/ui/game"
 )
 
 func StartWindow() {
@@ -18,14 +18,14 @@ func StartWindow() {
 
 	content := container.NewVBox()
 	logIn := widget.NewButton("Log in", func() {
-		loggedIn, loginName := buttonLogic.LogIn(loginEntry, passwordEntry, myWindow, content)
+		loggedIn, loginName := LogIn(loginEntry, passwordEntry, myWindow, content)
 		if loggedIn {
-			firstStageLayout(content, loginName)
+			game.FirstStageLayout(content, loginName)
 		}
 	})
 
 	signUp := widget.NewButton("Sign up", func() {
-		buttonLogic.SignUp(loginEntry, passwordEntry, myWindow, content)
+		SignUp(loginEntry, passwordEntry, myWindow, content)
 	})
 
 	buttons := container.NewGridWithColumns(10, logIn, signUp)

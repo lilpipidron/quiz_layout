@@ -1,11 +1,11 @@
-package window
+package game
 
 import (
 	"bufio"
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
-	"game_with_Nikita/internal/fileWork"
+	"game_with_Nikita/internal/file_work"
 	"image/color"
 	"log"
 	"strconv"
@@ -28,8 +28,8 @@ func layoutSetter(stage int, content *fyne.Container, taskText, login string) {
 	content.Add(canvas.NewText(taskText, color.RGBA{R: 123, G: 123, B: 123, A: 100}))
 
 	filename := login + "-log.txt"
-	logFile := fileWork.OpenWrite(filename)
-	defer fileWork.CloseFunc(logFile)
+	logFile := file_work.OpenWrite(filename)
+	defer file_work.CloseFunc(logFile)
 	writer := bufio.NewWriter(logFile)
 	defer func(writer *bufio.Writer) {
 		err := writer.Flush()
@@ -47,7 +47,7 @@ func layoutSetter(stage int, content *fyne.Container, taskText, login string) {
 	}
 }
 
-func firstStageLayout(content *fyne.Container, login string) {
+func FirstStageLayout(content *fyne.Container, login string) {
 	stage := First
 
 	layoutSetter(stage, content, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", login)

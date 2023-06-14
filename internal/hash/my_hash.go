@@ -1,4 +1,4 @@
-package myHash
+package hash
 
 import "log"
 

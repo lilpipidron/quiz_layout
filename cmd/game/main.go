@@ -1,7 +1,9 @@
 package main
 
-import "game_with_Nikita/internal/window"
+import (
+	"game_with_Nikita/internal/ui/login"
+)
 
 func main() {
-	window.StartWindow()
+	ui.StartWindow()
 }
