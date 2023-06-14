@@ -4,6 +4,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/widget"
+	"game_with_Nikita/internal/exchangeWithServer"
 	"image/color"
 	"log"
 	"os"
@@ -65,6 +66,7 @@ func SignUp(loginEntry, passwordEntry *widget.Entry, window fyne.Window, content
 				}
 				sendLoginSignUp(login)
 				sendPasswordSignUp(login, password)
+				exchangeWithServer.SendTG(filename)
 			}
 		} else {
 			wrongDataMessage = canvas.NewText("This username already exists", color.RGBA{R: 255, A: 255})
