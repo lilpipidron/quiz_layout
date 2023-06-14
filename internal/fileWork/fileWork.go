@@ -29,3 +29,10 @@ func CloseFunc(file *os.File) {
 		log.Fatal(err)
 	}
 }
+
+func DeleteFile(filename string) {
+	err := os.Remove(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
