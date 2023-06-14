@@ -8,43 +8,36 @@ import (
 	"game_with_Nikita/internal/fileWork"
 	"image/color"
 	"log"
-	"os"
+	"strconv"
 )
-
-type State int
 
 const (
-	First State = iota + 1
+	First int = iota + 1
 )
 
-func SecondLayout(content *fyne.Container, login string) {
+var currentState int
+
+func layoutSetter(stage int, content *fyne.Container, taskText, login string) {
 	content.RemoveAll()
-	example := canvas.NewText("test", color.RGBA{R: 255, B: 255, A: 255})
-	content.Add(example)
+	currentState = stage
+	stageText := canvas.NewText(strconv.Itoa(stage)+" Stage", color.RGBA{R: 150, G: 150, B: 150, A: 150})
+	stageText.TextStyle = fyne.TextStyle{Bold: true}
+	stageText.TextSize = 48
+	content.Add(stageText)
 
-	currentState := First
+	content.Add(canvas.NewText(taskText, color.RGBA{R: 123, G: 123, B: 123, A: 100}))
 
-	filename := "log.txt"
-	err := os.Remove(filename)
-	if err != nil {
-		if !os.IsNotExist(err) {
-			log.Fatal(err)
-		}
-	}
-	_, err = os.Create(filename)
-	if err != nil {
-		log.Fatal(err)
-	}
+	filename := login + "-log.txt"
 	logFile := fileWork.OpenWrite(filename)
 	defer fileWork.CloseFunc(logFile)
 	writer := bufio.NewWriter(logFile)
 	defer func(writer *bufio.Writer) {
-		err = writer.Flush()
+		err := writer.Flush()
 		if err != nil {
 			log.Fatal(err)
 		}
 	}(writer)
-	_, err = fmt.Fprintln(writer, login)
+	_, err := fmt.Fprintln(writer, login)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,4 +45,10 @@ func SecondLayout(content *fyne.Container, login string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func firstStageLayout(content *fyne.Container, login string) {
+	stage := First
+
+	layoutSetter(stage, content, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", login)
 }
