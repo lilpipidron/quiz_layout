@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
+	"fyne.io/fyne/v2/widget"
 	"game_with_Nikita/internal/file_work"
 	"image/color"
 	"log"
@@ -25,7 +26,9 @@ func layoutSetter(stage int, content *fyne.Container, taskText, login string) {
 	stageText.TextSize = 48
 	content.Add(stageText)
 
-	content.Add(canvas.NewText(taskText, color.RGBA{R: 123, G: 123, B: 123, A: 100}))
+	newText := widget.NewLabel(taskText)
+	newText.Wrapping = fyne.TextWrapWord
+	content.Add(newText)
 
 	filename := login + "-log.txt"
 	logFile := file_work.OpenWrite(filename)
