@@ -15,7 +15,7 @@ func StartWindow() {
 	myWindow := myApp.NewWindow("qwe")
 	myWindow.Resize(fyne.NewSize(500, 200))
 	myApp.Settings().SetTheme(theme.DarkTheme())
-	ic, err := fyne.LoadResourceFromPath("icon.png")
+	ic, err := fyne.LoadResourceFromPath("assets/logos/logo.png")
 	if err != nil {
 		log.Fatal(err)
 	}
