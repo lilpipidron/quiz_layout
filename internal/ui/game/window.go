@@ -1,22 +1,17 @@
 package game
 
 import (
-	"bufio"
-	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/widget"
-	"game_with_Nikita/internal/file_work"
 	"image/color"
-	"log"
-	"os"
 	"strconv"
 )
 
 var currentStage int
 
 func LayoutSetter(content *fyne.Container, taskText, login string) {
-	content.RemoveAll()
+	/*content.RemoveAll()
 	filename := login + "-log.txt"
 
 	if currentStage == 1 {
@@ -77,7 +72,7 @@ func LayoutSetter(content *fyne.Container, taskText, login string) {
 			log.Fatal(err)
 		}
 	}
-
+	*/
 	stageText := canvas.NewText(strconv.Itoa(currentStage)+" Stage", color.RGBA{R: 150, G: 150, B: 150, A: 150})
 	stageText.TextStyle = fyne.TextStyle{Bold: true}
 	stageText.TextSize = 48

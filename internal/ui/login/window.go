@@ -6,6 +6,7 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
+	"game_with_Nikita/internal/file_work"
 	"game_with_Nikita/internal/ui/game"
 	"log"
 )
@@ -38,7 +39,11 @@ func StartWindow() {
 		SignUp(loginEntry, passwordEntry, myWindow, content)
 	})
 
-	buttons := container.NewGridWithColumns(10, logIn, signUp)
+	update := widget.NewButton("Update", func() {
+		file_work.Update(0)
+	})
+
+	buttons := container.NewGridWithColumns(10, logIn, signUp, update)
 	content = container.NewVBox(loginEntry, passwordEntry, buttons)
 	myWindow.SetContent(content)
 	myWindow.ShowAndRun()
