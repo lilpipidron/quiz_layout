@@ -3,7 +3,7 @@ package ui
 import (
 	"bufio"
 	"fmt"
-	"game_with_Nikita/internal/file_work"
+	"game_with_Nikita/internal/fileWork"
 	"game_with_Nikita/internal/hash"
 	"log"
 	"strconv"
@@ -11,8 +11,8 @@ import (
 
 func sendLoginLogIn(login string) bool {
 	filename := login + "-log.txt"
-	logFile := file_work.OpenRead(filename)
-	defer file_work.CloseFunc(logFile)
+	logFile := fileWork.OpenRead(filename)
+	defer fileWork.CloseFunc(logFile)
 	reader := bufio.NewReader(logFile)
 	line, _, err := reader.ReadLine()
 	if err != nil {
@@ -29,8 +29,8 @@ func sendPasswordLogIn(filename, password string) bool {
 		return false
 	}
 	hashPass := hash.PasswordHash(password)
-	logFile := file_work.OpenRead(filename)
-	defer file_work.CloseFunc(logFile)
+	logFile := fileWork.OpenRead(filename)
+	defer fileWork.CloseFunc(logFile)
 	reader := bufio.NewReader(logFile)
 
 	_, _, err := reader.ReadLine()
@@ -55,8 +55,8 @@ func sendPasswordLogIn(filename, password string) bool {
 
 func sendLoginSignUp(login string) {
 	filename := login + "-log.txt"
-	logFile := file_work.OpenWrite(filename)
-	defer file_work.CloseFunc(logFile)
+	logFile := fileWork.OpenWrite(filename)
+	defer fileWork.CloseFunc(logFile)
 	writer := bufio.NewWriter(logFile)
 	defer func(writer *bufio.Writer) {
 		err := writer.Flush()
@@ -73,8 +73,8 @@ func sendLoginSignUp(login string) {
 func sendPasswordSignUp(login, password string) {
 	hashPass := hash.PasswordHash(password)
 	filename := login + "-log.txt"
-	logFile := file_work.OpenWrite(filename)
-	defer file_work.CloseFunc(logFile)
+	logFile := fileWork.OpenWrite(filename)
+	defer fileWork.CloseFunc(logFile)
 
 	scanner := bufio.NewScanner(logFile)
 	writer := bufio.NewWriter(logFile)

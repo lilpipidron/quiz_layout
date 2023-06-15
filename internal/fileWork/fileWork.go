@@ -1,4 +1,4 @@
-package file_work
+package fileWork
 
 import (
 	"log"

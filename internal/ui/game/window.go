@@ -58,8 +58,8 @@ func LayoutSetter(content *fyne.Container, taskText, login string) {
 			log.Fatal(err)
 		}
 	} else {
-		logFile := file_work.OpenWrite(filename)
-		defer file_work.CloseFunc(logFile)
+		logFile := fileWork.OpenWrite(filename)
+		defer fileWork.CloseFunc(logFile)
 		writer := bufio.NewWriter(logFile)
 		defer func(writer *bufio.Writer) {
 			err := writer.Flush()
