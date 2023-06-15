@@ -5,22 +5,24 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"runtime"
 )
 
 const (
 	nameWin = "123"
-	nameLin = "README.md"
+	nameLin = "000"
 	nameMac = "321"
 )
 
-func Update(system int) {
+func Update() {
 	var useName string
-	if system == 0 {
-		useName = nameWin
-	} else if system == 1 {
-		useName = nameLin
-	} else {
+	switch runtime.GOOS {
+	case "darwin":
 		useName = nameMac
+	case "linux":
+		useName = nameLin
+	case "windows":
+		useName = nameWin
 	}
 
 	url := "https://github.com/lipipidronstudy/updateRepo/blob/main/"

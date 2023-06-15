@@ -40,7 +40,7 @@ func StartWindow() {
 	})
 
 	update := widget.NewButton("Update", func() {
-		fileWork.Update(0)
+		fileWork.Update()
 	})
 
 	buttons := container.NewGridWithColumns(10, logIn, signUp, update)
