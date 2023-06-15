@@ -43,7 +43,12 @@ func StartWindow() {
 		fileWork.Update()
 	})
 
-	buttons := container.NewGridWithColumns(10, logIn, signUp, update)
+	emptyLabel := widget.NewLabel("")
+	buttons := container.NewGridWithColumns(10, logIn, signUp)
+	for i := 0; i < 7; i++ {
+		buttons.Add(emptyLabel)
+	}
+	buttons.Add(update)
 	content = container.NewVBox(loginEntry, passwordEntry, buttons)
 	myWindow.SetContent(content)
 	myWindow.ShowAndRun()
