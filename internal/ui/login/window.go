@@ -31,7 +31,7 @@ func StartWindow() {
 	logIn := widget.NewButton("Log in", func() {
 		loggedIn, loginName := LogIn(loginEntry, passwordEntry, myWindow, content)
 		if loggedIn {
-			game.FirstStageLayout(content, loginName)
+			game.Layout(content, loginName)
 		}
 	})
 

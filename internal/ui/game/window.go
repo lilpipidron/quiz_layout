@@ -13,13 +13,22 @@ import (
 	"strconv"
 )
 
-var currentStage int
+type LayoutData struct {
+	stage    int
+	username string
+	taskText string
+}
 
-func LayoutSetter(content *fyne.Container, taskText, login string) {
+func LayoutSwitcher(content *fyne.Container) {
 	content.RemoveAll()
-	filename := login + "-log.txt"
+	//todo
+}
 
-	if currentStage == 1 {
+func LayoutSetter(content *fyne.Container, data LayoutData) {
+	LayoutSwitcher(content)
+	filename := data.username + "-log.txt"
+
+	if data.stage == 1 {
 		if _, err := os.Stat(filename); err == nil {
 			file, err := os.Open(filename)
 			if err != nil {
@@ -32,15 +41,15 @@ func LayoutSetter(content *fyne.Container, taskText, login string) {
 			}
 			const stringsToKeep = 3
 			if len(lines) >= stringsToKeep {
-				if tmp, _ := strconv.Atoi(lines[len(lines)-1]); tmp > currentStage {
-					currentStage = tmp
+				if tmp, _ := strconv.Atoi(lines[len(lines)-1]); tmp > data.stage {
+					data.stage = tmp
 				}
 				if lines[len(lines)-1] == "" {
 					lines = lines[:len(lines)-1]
 				}
 				lines = lines[:len(lines)-1]
 			}
-			lines = append(lines, strconv.Itoa(currentStage))
+			lines = append(lines, strconv.Itoa(data.stage))
 			if err := file.Close(); err != nil {
 				log.Fatal(err)
 			}
@@ -73,24 +82,40 @@ func LayoutSetter(content *fyne.Container, taskText, login string) {
 				log.Fatal(err)
 			}
 		}(writer)
-		_, err := fmt.Fprintln(writer, currentStage)
+		_, err := fmt.Fprintln(writer, data.stage)
 		if err != nil {
 			log.Fatal(err)
 		}
 	}
 
-	stageText := canvas.NewText(strconv.Itoa(currentStage)+" Stage", color.RGBA{R: 150, G: 150, B: 150, A: 150})
+	stageText := canvas.NewText(strconv.Itoa(data.stage)+" Stage", color.RGBA{R: 150, G: 150, B: 150, A: 150})
 	stageText.TextStyle = fyne.TextStyle{Bold: true}
 	stageText.TextSize = 48
 	content.Add(stageText)
 
-	newText := widget.NewLabel(taskText)
+	newText := widget.NewLabel(data.taskText)
 	newText.Wrapping = fyne.TextWrapWord
 	content.Add(newText)
+
+	answerEntry := widget.NewEntry()
+	answerEntry.SetPlaceHolder("Enter answer")
+	content.Add(answerEntry)
+
+	nextStageButton := widget.NewButton("Next stage", func() {
+		//todo
+	})
+
+	submitButton := widget.NewButton("Submit", func() {
+		if validate(data.stage, answerEntry.Text) {
+			content.Add(nextStageButton)
+		}
+	})
+	content.Add(submitButton)
 }
 
-func FirstStageLayout(content *fyne.Container, login string) {
-	currentStage = 1
+func Layout(content *fyne.Container, login string) {
+	task := "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+	firstStageData := LayoutData{1, login, task}
 
-	LayoutSetter(content, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", login)
+	LayoutSetter(content, firstStageData)
 }
