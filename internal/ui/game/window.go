@@ -14,9 +14,10 @@ import (
 )
 
 type LayoutData struct {
-	stage    int
-	username string
-	taskText string
+	stage     int
+	username  string
+	taskText  string
+	nextStage bool
 }
 
 func LayoutSwitcher(content *fyne.Container) {
@@ -106,16 +107,18 @@ func LayoutSetter(content *fyne.Container, data LayoutData) {
 	})
 
 	submitButton := widget.NewButton("Submit", func() {
-		if validate(data.stage, answerEntry.Text) {
+		if validate(data.stage, answerEntry.Text) && !data.nextStage {
 			content.Add(nextStageButton)
+			data.nextStage = true
 		}
 	})
+
 	content.Add(submitButton)
 }
 
 func Layout(content *fyne.Container, login string) {
 	task := "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-	firstStageData := LayoutData{1, login, task}
+	firstStageData := LayoutData{1, login, task, false}
 
 	LayoutSetter(content, firstStageData)
 }
