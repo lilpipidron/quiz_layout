@@ -44,7 +44,7 @@ func StartWindow() {
 	})
 	//test button, delete btw
 	start := false
-	serverStart := widget.NewButton("server", func() {
+	serverStart := widget.NewButton("Server", func() {
 		if !start {
 			go server.Start("/huy", 123)
 			start = true
