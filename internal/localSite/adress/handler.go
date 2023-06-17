@@ -13,3 +13,13 @@ func Handler(ctx echo.Context) error {
 	}
 	return nil
 }
+
+func MakeFunc(stage int) func(ctx echo.Context) error {
+	return func(ctx echo.Context) error {
+		err := ctx.File("admin123-log.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
+		return nil
+	}
+}

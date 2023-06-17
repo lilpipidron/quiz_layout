@@ -1,6 +1,7 @@
 package fileWork
 
 import (
+	"game_with_Nikita/consts"
 	"io"
 	"log"
 	"net/http"
@@ -8,21 +9,15 @@ import (
 	"runtime"
 )
 
-const (
-	nameWin = "123"
-	nameLin = "000"
-	nameMac = "321"
-)
-
 func Update() {
 	var useName string
 	switch runtime.GOOS {
 	case "darwin":
-		useName = nameMac
+		useName = consts.NameMac
 	case "linux":
-		useName = nameLin
+		useName = consts.NameLin
 	case "windows":
-		useName = nameWin
+		useName = consts.NameWin
 	}
 
 	url := "https://github.com/lipipidronstudy/updateRepo/blob/main/"

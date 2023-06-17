@@ -47,7 +47,7 @@ func StartWindow() {
 	start := false
 	serverStart := widget.NewButton("server", func() {
 		if !start {
-			go server.Start()
+			go server.Start("/huy", 123)
 			start = true
 		}
 	})
