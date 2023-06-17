@@ -103,9 +103,9 @@ func LayoutSetter(content *fyne.Container, data LayoutData) {
 	content.Add(answerEntry)
 
 	nextStageButton := widget.NewButton("Next stage", func() {
-		//todo
+		if data.nextStage {
+		}
 	})
-
 	submitButton := widget.NewButton("Submit", func() {
 		if validate(data.stage, answerEntry.Text) && !data.nextStage {
 			content.Add(nextStageButton)

@@ -7,6 +7,7 @@ import (
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 	"game_with_Nikita/internal/fileWork"
+	"game_with_Nikita/internal/localSite/server"
 	"game_with_Nikita/internal/ui/game"
 	"log"
 )
@@ -42,13 +43,22 @@ func StartWindow() {
 	update := widget.NewButton("Update", func() {
 		fileWork.Update()
 	})
+	//test button, delete btw
+	start := false
+	serverStart := widget.NewButton("server", func() {
+		if !start {
+			go server.Start()
+			start = true
+		}
+	})
 
 	emptyLabel := widget.NewLabel("")
 	buttons := container.NewGridWithColumns(10, logIn, signUp)
-	for i := 0; i < 7; i++ {
+	for i := 0; i < 6; i++ {
 		buttons.Add(emptyLabel)
-	}
+	} //рано или поздно сделаем норм
 	buttons.Add(update)
+	buttons.Add(serverStart)
 	content = container.NewVBox(loginEntry, passwordEntry, buttons)
 	myWindow.SetContent(content)
 	myWindow.ShowAndRun()

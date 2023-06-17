@@ -77,3 +77,7 @@ func SignUp(loginEntry, passwordEntry *widget.Entry, window fyne.Window, content
 		window.Resize(window.Canvas().Size())
 	}
 }
+
+func NextStage() {
+
+}
