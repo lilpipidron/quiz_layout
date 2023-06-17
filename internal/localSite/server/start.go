@@ -13,7 +13,7 @@ func Start(path string, stage int) {
 
 	myEcho.GET("", adress.Handler)
 
-	pathFunc := adress.MakeFunc(123)
+	pathFunc := adress.MakeFunc(stage)
 
 	myEcho.GET(path, pathFunc)
 
