@@ -6,12 +6,12 @@ import (
 )
 
 func Start() {
-	echo := echo.New()
+	myEcho := echo.New()
 
 	/*echo.Use(middleware.Logger())
 	echo.Use(middleware.Recover())*/
 
-	echo.GET("", adress.Handler)
+	myEcho.GET("", adress.Handler)
 
-	echo.Logger.Fatal(echo.Start(":8080"))
+	myEcho.Logger.Fatal(myEcho.Start(":8080"))
 }
