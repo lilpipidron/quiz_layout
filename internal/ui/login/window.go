@@ -42,7 +42,7 @@ func StartWindow() {
 	update := widget.NewButton("Update", func() {
 		fileWork.Update()
 	})
-	//test button, delete btw
+	//test button, todo delete
 	start := false
 	serverStart := widget.NewButton("Server", func() {
 		if !start {
@@ -55,7 +55,7 @@ func StartWindow() {
 	buttons := container.NewGridWithColumns(10, logIn, signUp)
 	for i := 0; i < 6; i++ {
 		buttons.Add(emptyLabel)
-	} //рано или поздно сделаем норм
+	} //todo
 	buttons.Add(update)
 	buttons.Add(serverStart)
 	content = container.NewVBox(loginEntry, passwordEntry, buttons)

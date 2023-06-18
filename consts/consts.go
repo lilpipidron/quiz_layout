@@ -1,5 +1,7 @@
 package consts
 
+//fixme: if usage is low then make local
+
 const (
 	FirstAnswer = "123"
 )
