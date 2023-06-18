@@ -14,5 +14,6 @@ func Start(path string, stage int) {
 
 	myEcho.GET("", adress.Handler)
 	myEcho.GET("/second", adress.SecondStage)
+
 	myEcho.Logger.Fatal(myEcho.Start(":8080"))
 }

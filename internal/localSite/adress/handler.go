@@ -16,6 +16,7 @@ func Handler(ctx echo.Context) error {
 }
 
 func SecondStage(ctx echo.Context) error {
+	//todo
 	html := `
 		<!DOCTYPE html>
 		<html>
@@ -23,7 +24,8 @@ func SecondStage(ctx echo.Context) error {
 			<title>Second quest</title>
 		</head>
 		<body>
-			<img src="https://img.freepik.com/premium-vector/evil-pile-of-poo-brown-poop-with-grin-and-red-eyes-isolated-on-white-background_53562-14551.jpg" alt="My Image">
+
+			<img src="короче похуй, вставляем полный путь с инета, будем как-то разбираться с тем, как это под игру адаптировать, либо найти какое-то анонимное хранилище по типу двача и с разных тредов вставлять всю хуйню" alt="хуй залупа пенис член">
 		</body>
 		</html>
 	`
