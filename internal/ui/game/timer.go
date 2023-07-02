@@ -7,10 +7,13 @@ import (
 	"time"
 )
 
-func Timer(minutes int, seconds int, container *fyne.Container) {
+func Timer(stop <-chan bool, minutes int, seconds int, container *fyne.Container) {
 	clock := widget.NewLabel("")
 
 	for i := minutes*60 + seconds; i > 0; i-- {
+		if <-stop {
+			break
+		}
 		min := i / 60
 		sec := i % 60
 		text := fmt.Sprintf("Time left: %d:%d", min, sec)

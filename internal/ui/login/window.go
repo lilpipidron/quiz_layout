@@ -59,10 +59,6 @@ func StartWindow() {
 	buttons.Add(update)
 	buttons.Add(serverStart)
 	content = container.NewVBox(loginEntry, passwordEntry, buttons)
-
-	//test, todo delete
-	go game.Timer(30, 30, content)
-
 	myWindow.SetContent(content)
 	myWindow.ShowAndRun()
 }
