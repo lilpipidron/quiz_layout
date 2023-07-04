@@ -1,4 +1,4 @@
-package adress
+package address
 
 import (
 	"github.com/labstack/echo/v4"
@@ -25,7 +25,7 @@ func SecondStage(ctx echo.Context) error {
 		</head>
 		<body>
 
-			<img src="короче похуй, вставляем полный путь с инета, будем как-то разбираться с тем, как это под игру адаптировать, либо найти какое-то анонимное хранилище по типу двача и с разных тредов вставлять всю хуйню" alt="хуй залупа пенис член">
+			<img src="отмена" alt="куку">
 		</body>
 		</html>
 	`

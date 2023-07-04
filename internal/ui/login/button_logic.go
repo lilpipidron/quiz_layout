@@ -4,6 +4,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/widget"
+	"game_with_Nikita/internal/logs"
 	"image/color"
 	"log"
 	"os"
@@ -31,7 +32,7 @@ func LogIn(loginEntry, passwordEntry *widget.Entry, window fyne.Window, content 
 		}
 	}
 
-	if invalidLogin || !(sendLoginLogIn(login) && sendPasswordLogIn(filename, password)) {
+	if invalidLogin || !(logs.SendLoginLogIn(login) && logs.SendPasswordLogIn(filename, password)) {
 		content.Add(wrongDataMessage)
 		window.SetContent(content)
 		window.Resize(window.Canvas().Size())
@@ -63,8 +64,8 @@ func SignUp(loginEntry, passwordEntry *widget.Entry, window fyne.Window, content
 				if createErr != nil {
 					log.Fatal(createErr)
 				}
-				sendLoginSignUp(login)
-				sendPasswordSignUp(login, password)
+				logs.SendLoginSignUp(login)
+				logs.SendPasswordSignUp(login, password)
 			}
 		} else {
 			wrongDataMessage = canvas.NewText("This username already exists", color.RGBA{R: 255, A: 255})
@@ -79,5 +80,5 @@ func SignUp(loginEntry, passwordEntry *widget.Entry, window fyne.Window, content
 }
 
 func NextStage() {
-
+	//todo
 }

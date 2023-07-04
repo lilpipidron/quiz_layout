@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-const stageAmount = 1
+const stageAmount = 2
 
 type StageData struct {
 	number             int
@@ -16,53 +16,60 @@ type StageData struct {
 	nextStageAvailable bool
 }
 
-func LayoutSwitcher(content *fyne.Container) {
+func layoutSetter(content *fyne.Container, stages []StageData, login string, currentStage *int) {
 	content.RemoveAll()
-	//todo
-}
 
-func LayoutSetter(content *fyne.Container, stages []StageData, currentStage int) {
-	LayoutSwitcher(content)
+	if *currentStage != stageAmount+1 {
+		stageText := canvas.NewText(strconv.Itoa(stages[*currentStage-1].number)+" Stage", color.RGBA{R: 150, G: 150, B: 150, A: 150})
+		stageText.TextStyle = fyne.TextStyle{Bold: true}
+		stageText.TextSize = 48
+		content.Add(stageText)
 
-	stageText := canvas.NewText(strconv.Itoa(stages[currentStage].number)+" Stage", color.RGBA{R: 150, G: 150, B: 150, A: 150})
-	stageText.TextStyle = fyne.TextStyle{Bold: true}
-	stageText.TextSize = 48
-	content.Add(stageText)
+		newText := widget.NewLabel(stages[*currentStage-1].taskText)
+		newText.Wrapping = fyne.TextWrapWord
+		content.Add(newText)
 
-	newText := widget.NewLabel(stages[currentStage].taskText)
-	newText.Wrapping = fyne.TextWrapWord
-	content.Add(newText)
+		if !stages[*currentStage-1].nextStageAvailable {
+			answerEntry := widget.NewEntry()
+			answerEntry.SetPlaceHolder("Enter answer")
+			content.Add(answerEntry)
+			nextStageButton := widget.NewButton("Next stage", func() {
+				*currentStage = *currentStage + 1
+				*currentStage = getSaveData(login, *currentStage)
+				layoutSetter(content, stages, login, currentStage)
+			})
 
-	answerEntry := widget.NewEntry()
-	answerEntry.SetPlaceHolder("Enter answer")
-	content.Add(answerEntry)
+			submitButton := widget.NewButton("Submit", func() {
+				if validate(stages[*currentStage-1].number, answerEntry.Text) && !stages[*currentStage-1].nextStageAvailable {
+					content.Add(nextStageButton)
+					stages[*currentStage-1].nextStageAvailable = true
+				} else {
+					if len(content.Objects) == 4 { // fixme: number will vary depending on stage content
+						wrongAnswerMessage := canvas.NewText("Wrong answer!", color.RGBA{R: 255, A: 255})
+						wrongAnswerMessage.TextStyle = fyne.TextStyle{Italic: true}
+						content.Add(wrongAnswerMessage)
+					}
+				}
+			})
 
-	nextStageButton := widget.NewButton("Next stage", func() {
-		LayoutSetter(content, stages, currentStage+1)
-	})
-
-	submitButton := widget.NewButton("Submit", func() {
-		if validate(stages[currentStage].number, answerEntry.Text) && !stages[currentStage].nextStageAvailable {
-			content.Add(nextStageButton)
-			stages[currentStage].nextStageAvailable = true
+			content.Add(submitButton)
 		}
-	})
+	} else {
+		stageText := canvas.NewText("Congratulations!", color.RGBA{R: 150, G: 150, B: 150, A: 150})
+		stageText.TextStyle = fyne.TextStyle{Bold: true}
+		stageText.TextSize = 48
+		content.Add(stageText)
 
-	content.Add(submitButton)
+		newText := widget.NewLabel("Congratulations! You answered all the questions correctly!\nWe are impressed by your outstanding performance and knowledge. You are clearly well-informed and very intelligent.\nYou should feel proud of this amazing achievement.")
+		newText.Wrapping = fyne.TextWrapWord
+		content.Add(newText)
+	}
 }
 
-func Layout(content *fyne.Container, login string) {
+func DefaultLayout(content *fyne.Container, login string) {
 	stages := make([]StageData, stageAmount)
-	for i, stage := range stages {
-		stage.number = i + 1
-		stage.taskText = GetTaskText(stage.number)
-		stage.nextStageAvailable = false
-	}
-
-	maxStage := GetSaveData(login)
-	for i := 0; i < maxStage-1; i++ {
-		stages[i].nextStageAvailable = true
-	}
-
-	LayoutSetter(content, stages, maxStage-1)
+	maxAvailableStage := 0
+	maxAvailableStage = getSaveData(login, maxAvailableStage)
+	assignTasks(stages, maxAvailableStage)
+	layoutSetter(content, stages, login, &maxAvailableStage)
 }

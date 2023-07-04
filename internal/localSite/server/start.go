@@ -1,7 +1,7 @@
 package server
 
 import (
-	"game_with_Nikita/internal/localSite/adress"
+	"game_with_Nikita/internal/localSite/address"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -12,8 +12,8 @@ func Start(path string, stage int) {
 	myEcho.Use(middleware.Logger())
 	myEcho.Use(middleware.Recover())
 
-	myEcho.GET("", adress.Handler)
-	myEcho.GET("/second", adress.SecondStage)
+	myEcho.GET("", address.Handler)
+	myEcho.GET("/second", address.SecondStage)
 
 	myEcho.Logger.Fatal(myEcho.Start(":8080"))
 }

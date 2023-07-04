@@ -3,7 +3,8 @@ package consts
 //fixme: if usage is low then make local
 
 const (
-	FirstAnswer = "123"
+	FirstAnswer  = "123"
+	SecondAnswer = "123"
 )
 
 const (

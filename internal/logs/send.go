@@ -1,4 +1,4 @@
-package ui
+package logs
 
 import (
 	"bufio"
@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func sendLoginLogIn(login string) bool {
+func SendLoginLogIn(login string) bool {
 	filename := login + "-log.txt"
 	logFile := fileWork.OpenRead(filename)
 	defer fileWork.CloseFunc(logFile)
@@ -24,7 +24,7 @@ func sendLoginLogIn(login string) bool {
 	return true
 }
 
-func sendPasswordLogIn(filename, password string) bool {
+func SendPasswordLogIn(filename, password string) bool {
 	if len(password) < 8 {
 		return false
 	}
@@ -53,7 +53,7 @@ func sendPasswordLogIn(filename, password string) bool {
 	return true
 }
 
-func sendLoginSignUp(login string) {
+func SendLoginSignUp(login string) {
 	filename := login + "-log.txt"
 	logFile := fileWork.OpenWrite(filename)
 	defer fileWork.CloseFunc(logFile)
@@ -70,7 +70,7 @@ func sendLoginSignUp(login string) {
 	}
 }
 
-func sendPasswordSignUp(login, password string) {
+func SendPasswordSignUp(login, password string) {
 	hashPass := hash.PasswordHash(password)
 	filename := login + "-log.txt"
 	logFile := fileWork.OpenWrite(filename)

@@ -6,6 +6,8 @@ func validate(stage int, answer string) bool {
 	switch stage {
 	case 1:
 		return answer == consts.FirstAnswer
+	case 2:
+		return answer == consts.SecondAnswer
 	default:
 		return false
 	}
