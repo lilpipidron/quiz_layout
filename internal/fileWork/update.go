@@ -20,7 +20,7 @@ func Update() {
 		useName = consts.NameWin
 	}
 
-	url := "https://github.com/lipipidronstudy/updateRepo/blob/main/"
+	url := "url репо, откуда качать"
 	resp, err := http.Get(url + useName)
 	if err != nil {
 		log.Fatal(err)

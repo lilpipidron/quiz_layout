@@ -8,7 +8,7 @@ import (
 )
 
 func Handler(ctx echo.Context) error {
-	err := ctx.String(http.StatusOK, "Ты пидорас")
+	err := ctx.String(http.StatusOK, "Все работает")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -25,7 +25,7 @@ func SecondStage(ctx echo.Context) error {
 		</head>
 		<body>
 
-			<img src="отмена" alt="куку">
+			<img src="суда путь на картинку" alt="если нет картинки">
 		</body>
 		</html>
 	`
