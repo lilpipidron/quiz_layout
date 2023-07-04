@@ -1,4 +1,4 @@
-package fileWork
+package filework
 
 import (
 	"game_with_Nikita/consts"

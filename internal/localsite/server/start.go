@@ -1,7 +1,7 @@
 package server
 
 import (
-	"game_with_Nikita/internal/localSite/address"
+	"game_with_Nikita/internal/localsite/address"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )

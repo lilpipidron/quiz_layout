@@ -5,8 +5,8 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	"game_with_Nikita/internal/fileWork"
-	"game_with_Nikita/internal/localSite/server"
+	"game_with_Nikita/internal/filework"
+	"game_with_Nikita/internal/localsite/server"
 	"game_with_Nikita/internal/ui/game"
 	"log"
 )
@@ -40,7 +40,7 @@ func StartWindow() {
 	})
 
 	update := widget.NewButton("Update", func() {
-		fileWork.Update()
+		filework.Update()
 	})
 	//test button, todo delete
 	start := false
